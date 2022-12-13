@@ -1,6 +1,6 @@
 module candymachine::candymachine {
     use sui::coin::{Self, Coin};
-    use std::string::String;
+    use std::string::{Self,String};
     use std::vector;
     use std::hash;
     use std::bcs;
@@ -28,7 +28,6 @@ module candymachine::candymachine {
         paused: bool,
         total_supply: u64,
         minted: u64,
-        token_mutate_setting:vector<bool>,
         candies:vector<BitVector>,
         whitelist: vector<address>,
     }
@@ -48,8 +47,6 @@ module candymachine::candymachine {
         presale_mint_price: u64,
         public_sale_mint_price: u64,
         total_supply:u64,
-        collection_mutate_setting:vector<bool>,
-        token_mutate_setting:vector<bool>,
         seeds: vector<u8>,
         ctx: &mut TxContext,
     ){
@@ -69,7 +66,6 @@ module candymachine::candymachine {
             paused:false,
             total_supply,
             minted:0,
-            token_mutate_setting,
             candies:candies_data,
             whitelist:vector::empty<address>()
         };
@@ -78,8 +74,9 @@ module candymachine::candymachine {
         transfer::transfer(candymachine, tx_context::sender(ctx));
     }
 
-    public entry fun mint_nft(ctx: &mut TxContext,candymachine: &mut CandyMachine){
+    public entry fun mint_nft(candymachine: &mut CandyMachine,ctx: &mut TxContext){
         let CandyMachine {
+            id,
             collection_name,
             collection_description,
             baseuri,
@@ -91,11 +88,12 @@ module candymachine::candymachine {
             presale_mint_price,
             public_sale_mint_price,
             total_supply,
-            collection_mutate_setting,
-            token_mutate_setting,
-            seeds
+            candies,
+            minted,
+            paused,
+            whitelist
         } = candymachine;
-        let remaining = total_supply - minted;
+        let remaining = *total_supply - *minted;
         let random_index = pseudo_random(tx_context::sender(ctx),remaining);
         let required_position=0; // the number of unset 
         let bucket =0; // number of buckets
@@ -103,7 +101,7 @@ module candymachine::candymachine {
         let new =  vector::empty();
         while (required_position < random_index)
         {
-        let bitvector=*vector::borrow_mut(&mut candy_data.candies, bucket);
+        let bitvector=*vector::borrow_mut(&mut *candies, bucket);
         let i =0;
         while (i < bit_vector::length(&bitvector)) {
             if (!bit_vector::is_index_set(&bitvector, i))
@@ -122,18 +120,23 @@ module candymachine::candymachine {
         vector::push_back(&mut new, bitvector);
         bucket=bucket+1
         };
-        while (bucket < vector::length(&candy_data.candies))
+        while (bucket < vector::length(candies))
         {
-            let bitvector=*vector::borrow_mut(&mut candy_data.candies, bucket);
+            let bitvector=*vector::borrow_mut(&mut *candies, bucket);
             vector::push_back(&mut new, bitvector);
             bucket=bucket+1;
         };
 
         let mint_position = pos;
-
-        candy_data.candies = new;
+        candymachine.candies = new;
+        string::append(&mut *baseuri,num_str(mint_position));        
+        let token_name = *collection_name;
+        string::append(&mut token_name,string::utf8(b" #"));
+        string::append(&mut token_name,num_str(mint_position));
+        string::append(&mut *baseuri,string::utf8(b".json"));
+        sui::devnet_nft::mint(*string::bytes(&*collection_name),*string::bytes(&*collection_description),*string::bytes(&token_name),ctx);
     }
-    fun create_bit_mask(nfts: u64): vector<BitVector>
+    public fun create_bit_mask(nfts: u64): vector<BitVector>
     {
         let full_buckets = nfts/1024; 
         let remaining =nfts-full_buckets*1024; 
@@ -154,7 +157,7 @@ module candymachine::candymachine {
     }
     //takes the random number between 1 to total supply as index
     // returns the index among the available
-    fun mint_available_number(index:u64,data:vector<BitVector>):(u64,vector<BitVector>)
+    public fun mint_available_number(index:u64,data:vector<BitVector>):(u64,vector<BitVector>)
     {
         let required_position=0; // the number of unset 
         let bucket =0; // number of buckets
@@ -181,7 +184,7 @@ module candymachine::candymachine {
         (pos,
         data)
     }
-    fun pseudo_random(add:address,remaining:u64):u64
+    public fun pseudo_random(add:address,remaining:u64):u64
     {
         let x = bcs::to_bytes<address>(&add);
         let y = bcs::to_bytes<u64>(&remaining);
@@ -212,4 +215,17 @@ module candymachine::candymachine {
     public fun to_u64(v: vector<u8>): u64 {
         from_bytes<u64>(v)
     }
+    fun num_str(num: u64): String
+    {
+        let v1 = vector::empty();
+        while (num/10 > 0){
+            let rem = num%10;
+            vector::push_back(&mut v1, (rem+48 as u8));
+            num = num/10;
+        };
+        vector::push_back(&mut v1, (num+48 as u8));
+        vector::reverse(&mut v1);
+        string::utf8(v1)
+    }
+
 }
