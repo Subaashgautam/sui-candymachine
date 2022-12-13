@@ -1,4 +1,4 @@
-module candymachinex::candymachinex {
+module candymachine::candymachine {
     use std::string::{Self,String};
     use std::vector;
     use std::hash;
@@ -189,10 +189,6 @@ module candymachinex::candymachinex {
         random
 
     }
-    public(friend) native fun from_bytes<T>(bytes: vector<u8>): T;
-    public fun to_u64(v: vector<u8>): u64 {
-        from_bytes<u64>(v)
-    }
     fun num_str(num: u64): String
     {
         let v1 = vector::empty();
@@ -205,11 +201,20 @@ module candymachinex::candymachinex {
         vector::reverse(&mut v1);
         string::utf8(v1)
     }
+    fun to_u64(bytes: vector<u8>): u64 {
+        let j = 0u64;
+        let i = 0u64;
+        while (i < 8) {
+            j = j | ((*vector::borrow(&bytes, i) as u64) << ((8 * (7 - i)) as u8));
+            i = i + 1;
+        };
+        return j
+    }
 }
 
 #[test_only]
 module sui::candymchineTests {
-    use candymachinex::candymachinex::{Self};
+    use candymachine::candymachine::{Self};
     // use sui::test_scenario as ts;
     use std::string;
     use sui::tx_context;
@@ -220,13 +225,13 @@ module sui::candymchineTests {
         // create the NFT
         // let scenario = ts::begin(addr1);
         let ctx = tx_context::dummy();
-        candymachinex::init_candy(
+        candymachine::init_candy(
             string::utf8(b"Mokshya Test"),
             string::utf8(b"Mokshya Test"),
             string::utf8(b"https://mokshya.io/images/"),
             addr1,
-            100,
             1000,
+            100,
             100,
             100,
             1000,

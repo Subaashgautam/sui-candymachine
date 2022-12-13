@@ -1,0 +1,72 @@
+2022-12-13T06:59:28.256658Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T06:59:28.256932Z  INFO sui::client_commands: Transaction Hash: /duZEXWXODeNVxMpAWtksIiXHIIBKDGOpZs5W4x169E=
+2022-12-13T06:59:28.256936Z  INFO sui::client_commands: Transaction Signature: AA==@PLkHmVV46n2crq7KH1PjP7gO3xQVG6OyThaqyRbVT1o2mfEiH1GMbiN5aMWCioDDnAKifH+xR104RQeU82KkBg==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T06:59:28.256939Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 1, 2]>
+2022-12-13T06:59:28.256941Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T06:59:28.256943Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T06:59:28.256944Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T06:59:28.256946Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T06:59:28.256949Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T06:59:47.261430Z  INFO sui::client_commands:                  Object ID                  |  Gas Value 
+2022-12-13T06:59:47.261601Z  INFO sui::client_commands: ----------------------------------------------------------------------
+2022-12-13T06:59:47.261608Z  INFO sui::client_commands:  0x1454e74e6d9971f4237c776b326e08edbb16c248 | 99999999977256
+2022-12-13T06:59:47.261612Z  INFO sui::client_commands:  0x2cc9bc5ac98e24df83e38201c7efcac7032ac5ff | 100000000000000
+2022-12-13T06:59:47.261616Z  INFO sui::client_commands:  0x58d3323174fe9b0a59559bdd1d357cea54992daa | 100000000000000
+2022-12-13T06:59:47.261620Z  INFO sui::client_commands:  0x61137aad0e10cc3256a7306d99707992543e051b | 100000000000000
+2022-12-13T06:59:47.261625Z  INFO sui::client_commands:  0xc3bab0405274331671fed79c16d1724fb24a8256 | 100000000000000
+2022-12-13T07:00:21.017962Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:00:21.018006Z  INFO sui::client_commands: Transaction Hash: QB2UcSVCOvTuOWzRPsDn0WBDD+zVDbTgpbicWgq4Uzc=
+2022-12-13T07:00:21.018009Z  INFO sui::client_commands: Transaction Signature: AA==@1ijRq+JP+8/CTmwYjTf5mMAnHNdwrxK5fGR3poYiOpE7vTWRCBXE+cnppNe3bFGsueV8KNf1oGlgBFXF8JACCw==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:00:21.018011Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[1, 2, 3]>
+2022-12-13T07:00:21.018013Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:00:21.018014Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:00:21.018016Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T07:00:21.018018Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:00:21.018020Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T07:02:06.646869Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:02:06.647145Z  INFO sui::client_commands: Transaction Hash: kDe69VyyloHUa+22HbTQSw2+FbSZZsR540pBoBrSF94=
+2022-12-13T07:02:06.647148Z  INFO sui::client_commands: Transaction Signature: AA==@bXsPiOEWAFZOuc6/lw9KnIgYZdhJ0ifqJdBjG7GW+QpSVbY0yN6iGi5kDUAZO3XRgZ0uj6X1cDDb2oeqfpmAAA==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:02:06.647151Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 1, 3]>
+2022-12-13T07:02:06.647153Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:02:06.647155Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:02:06.647157Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T07:02:06.647158Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:02:06.647160Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T07:03:11.621086Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:03:11.621124Z  INFO sui::client_commands: Transaction Hash: 7qJcmTRYg0h5DxFuMpqj/bLKF/hoD4WvcQFhFn3bB1s=
+2022-12-13T07:03:11.621127Z  INFO sui::client_commands: Transaction Signature: AA==@mBlvfKMgsEpujbzCtNEoe85M/KZj4hNHt9BvCTLRmv9fuvPzUPoWUGS12PaCDy59X4xxChj9ZGBfWt3P02/dAA==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:03:11.621129Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 2, 3]>
+2022-12-13T07:03:11.621131Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:03:11.621133Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:03:11.621134Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T07:03:11.621136Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:03:11.621138Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T07:06:37.083982Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:06:37.084399Z  INFO sui::client_commands: Transaction Hash: BB7/7fimJXcWfgkBvDNU17vPcpGaP0xgljkzX0uD+Fc=
+2022-12-13T07:06:37.084409Z  INFO sui::client_commands: Transaction Signature: AA==@Nnd+UhZDVz66ER9nrN5RE+H/JXHkzJzGgaELK9A+rSvb8PzixW1OvuJKknFHkoQnKJdbCW0kQRchx9HHGktxDQ==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:06:37.084415Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 2, 3]>
+2022-12-13T07:06:37.084419Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:06:37.084423Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:06:37.084427Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T07:06:37.084431Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:06:37.084435Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T07:06:57.456876Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:06:57.456915Z  INFO sui::client_commands: Transaction Hash: GGg5uA460NooEVqUMpCTU5sB4ULUGQ2T5FAa5sLI8vU=
+2022-12-13T07:06:57.456918Z  INFO sui::client_commands: Transaction Signature: AA==@hX1CwnNd26O+EfzfnC8UScU7iHb/OoWvvlI4ZQCjB4faGunOsMtMIbp0i2jZ2QLwmjUAJQkrEhJlMNvI0LQ3Dw==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:06:57.456920Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 2, 3]>
+2022-12-13T07:06:57.456922Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:06:57.456924Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:06:57.456926Z  INFO sui::client_commands: Status : Failure { error: "VMVerificationOrDeserializationError" }
+2022-12-13T07:06:57.456928Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:06:57.456930Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
+2022-12-13T07:07:20.146064Z  INFO sui::client_commands: [1m----- Certificate ----[0m
+2022-12-13T07:07:20.146118Z  INFO sui::client_commands: Transaction Hash: 0nTdaiG4PKR38a957T9Bz+88nLOv82u6r0hCapxUGuU=
+2022-12-13T07:07:20.146121Z  INFO sui::client_commands: Transaction Signature: AA==@NGzXJ0q9WjLGgtZXNwnj6raZeX+8ePShgWgiX/Dvzy09XP7//t3mfUkBEw705IHjHaol2fixlRWKSnCn2QPjDw==@6KbT0027aJvIhWyZjKM9ThqAfC1f1ecUdgZaU0jpASk=
+2022-12-13T07:07:20.146124Z  INFO sui::client_commands: Signed Authorities Bitmap: RoaringBitmap<[0, 1, 3]>
+2022-12-13T07:07:20.146125Z  INFO sui::client_commands: Transaction Kind : Publish
+2022-12-13T07:07:20.146127Z  INFO sui::client_commands: [1m----- Transaction Effects ----[0m
+2022-12-13T07:07:20.146129Z  INFO sui::client_commands: Status : Success
+2022-12-13T07:07:20.146131Z  INFO sui::client_commands: Created Objects:
+2022-12-13T07:07:20.146132Z  INFO sui::client_commands:   - ID: 0xabf28b79f31d50356ba5e0236684e9ba93a9a544 , Owner: Immutable
+2022-12-13T07:07:20.146134Z  INFO sui::client_commands: Mutated Objects:
+2022-12-13T07:07:20.146136Z  INFO sui::client_commands:   - ID: 0x1454e74e6d9971f4237c776b326e08edbb16c248 , Owner: Account Address ( 0xe5d7776a3f85e9db46f0ba0b9f3785972ab23a5d )
