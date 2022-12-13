@@ -1,13 +1,10 @@
-module candymachine::candymachine {
-    use sui::coin::{Self, Coin};
+module candymachinex::candymachinex {
     use std::string::{Self,String};
     use std::vector;
     use std::hash;
     use std::bcs;
     use std::bit_vector::{Self,BitVector};
-    use sui::balance::{Self, Balance, Supply};
     use sui::object::{Self, UID};
-    use sui::sui::SUI;
     use sui::transfer;
     use sui::tx_context::{Self, TxContext};
 
@@ -29,7 +26,6 @@ module candymachine::candymachine {
         total_supply: u64,
         minted: u64,
         candies:vector<BitVector>,
-        whitelist: vector<address>,
     }
     struct Whitelist has key {
         id:UID,
@@ -47,7 +43,7 @@ module candymachine::candymachine {
         presale_mint_price: u64,
         public_sale_mint_price: u64,
         total_supply:u64,
-        seeds: vector<u8>,
+        _seeds: vector<u8>,
         ctx: &mut TxContext,
     ){
         let candies_data = create_bit_mask(total_supply);
@@ -67,7 +63,6 @@ module candymachine::candymachine {
             total_supply,
             minted:0,
             candies:candies_data,
-            whitelist:vector::empty<address>()
         };
         assert!(royalty_points_denominator > 0, EINVALID_ROYALTY_NUMERATOR_DENOMINATOR);
         assert!(royalty_points_numerator <= royalty_points_denominator, EINVALID_ROYALTY_NUMERATOR_DENOMINATOR);
@@ -75,25 +70,7 @@ module candymachine::candymachine {
     }
 
     public entry fun mint_nft(candymachine: &mut CandyMachine,ctx: &mut TxContext){
-        let CandyMachine {
-            id,
-            collection_name,
-            collection_description,
-            baseuri,
-            royalty_payee_address,
-            royalty_points_denominator,
-            royalty_points_numerator,
-            presale_mint_time,
-            public_sale_mint_time,
-            presale_mint_price,
-            public_sale_mint_price,
-            total_supply,
-            candies,
-            minted,
-            paused,
-            whitelist
-        } = candymachine;
-        let remaining = *total_supply - *minted;
+        let remaining = candymachine.total_supply - candymachine.minted;
         let random_index = pseudo_random(tx_context::sender(ctx),remaining);
         let required_position=0; // the number of unset 
         let bucket =0; // number of buckets
@@ -101,7 +78,7 @@ module candymachine::candymachine {
         let new =  vector::empty();
         while (required_position < random_index)
         {
-        let bitvector=*vector::borrow_mut(&mut *candies, bucket);
+        let bitvector=*vector::borrow_mut(&mut candymachine.candies, bucket);
         let i =0;
         while (i < bit_vector::length(&bitvector)) {
             if (!bit_vector::is_index_set(&bitvector, i))
@@ -120,21 +97,22 @@ module candymachine::candymachine {
         vector::push_back(&mut new, bitvector);
         bucket=bucket+1
         };
-        while (bucket < vector::length(candies))
+        while (bucket < vector::length(&candymachine.candies))
         {
-            let bitvector=*vector::borrow_mut(&mut *candies, bucket);
+            let bitvector=*vector::borrow_mut(&mut candymachine.candies, bucket);
             vector::push_back(&mut new, bitvector);
             bucket=bucket+1;
         };
 
         let mint_position = pos;
+        let baseuri = candymachine.baseuri;
         candymachine.candies = new;
-        string::append(&mut *baseuri,num_str(mint_position));        
-        let token_name = *collection_name;
+        string::append(&mut baseuri,num_str(mint_position));        
+        let token_name = candymachine.collection_name;
         string::append(&mut token_name,string::utf8(b" #"));
         string::append(&mut token_name,num_str(mint_position));
-        string::append(&mut *baseuri,string::utf8(b".json"));
-        sui::devnet_nft::mint(*string::bytes(&*collection_name),*string::bytes(&*collection_description),*string::bytes(&token_name),ctx);
+        string::append(&mut baseuri,string::utf8(b".json"));
+        sui::devnet_nft::mint(*string::bytes(&candymachine.collection_name),*string::bytes(&candymachine.collection_description),*string::bytes(&token_name),ctx);
     }
     public fun create_bit_mask(nfts: u64): vector<BitVector>
     {
@@ -227,5 +205,37 @@ module candymachine::candymachine {
         vector::reverse(&mut v1);
         string::utf8(v1)
     }
+}
 
+#[test_only]
+module sui::candymchineTests {
+    use candymachinex::candymachinex::{Self};
+    // use sui::test_scenario as ts;
+    use std::string;
+    use sui::tx_context;
+
+    #[test]
+    fun init_candy_test() {
+        let addr1 = @0xA;
+        // create the NFT
+        // let scenario = ts::begin(addr1);
+        let ctx = tx_context::dummy();
+        candymachinex::init_candy(
+            string::utf8(b"Mokshya Test"),
+            string::utf8(b"Mokshya Test"),
+            string::utf8(b"https://mokshya.io/images/"),
+            addr1,
+            100,
+            1000,
+            100,
+            100,
+            1000,
+            10000,
+            1000,
+            b"sss",
+            &mut ctx
+        );
+        
+        // ts::end(scenario);
+    }
 }

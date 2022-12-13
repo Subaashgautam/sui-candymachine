@@ -1,5 +1,5 @@
 [package]
-name = "candymachine"
+name = "candymachinex"
 version = "0.0.1"
 
 [dependencies]
@@ -8,5 +8,5 @@ MoveStdlib = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/s
 
 [addresses]
 std="0x1"
-candymachine =  "0x0"
+candymachinex =  "0x0"
 sui =  "0000000000000000000000000000000000000002"
