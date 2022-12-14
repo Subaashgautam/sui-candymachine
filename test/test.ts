@@ -27,16 +27,18 @@ describe("whitelist", () => {
             ],
             gasBudget: 10000,
         });
+        const candymachine_object = moveCallTxn['EffectsCert']['effects']['effects']['created'][0]['reference']['objectId']
+        
+        console.log("Candy Machine Object created: "+candymachine_object)
         const moveCallMintTxn = await signer.executeMoveCall({
             packageObjectId: '0xe13503ccfc7ea759c52a6944dc016bf12a1f2110',
             module: 'candymachine',
             function: 'mint_nft',
             typeArguments: [],
             arguments: [
-                "0xd0e553dbb9c694ca7398572744e6a6b4ed2cb818"
+                candymachine_object
             ],
             gasBudget: 10000,
         });
-        console.log('moveCallTxn', moveCallMintTxn);
     })
 })
