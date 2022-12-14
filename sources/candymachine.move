@@ -214,33 +214,44 @@ module candymachine::candymachine {
 
 #[test_only]
 module sui::candymchineTests {
-    use candymachine::candymachine::{Self};
-    // use sui::test_scenario as ts;
+    use candymachine::candymachine::{Self,CandyMachine};
+    use sui::test_scenario;
     use std::string;
-    use sui::tx_context;
+    // use sui::tx_context;
 
     #[test]
     fun init_candy_test() {
-        let addr1 = @0xA;
-        // create the NFT
-        // let scenario = ts::begin(addr1);
-        let ctx = tx_context::dummy();
-        candymachine::init_candy(
-            string::utf8(b"Mokshya Test"),
-            string::utf8(b"Mokshya Test"),
-            string::utf8(b"https://mokshya.io/images/"),
-            addr1,
-            1000,
-            100,
-            100,
-            100,
-            1000,
-            10000,
-            1000,
-            b"sss",
-            &mut ctx
-        );
-        
-        // ts::end(scenario);
+        // create test addresses representing users
+        let admin = @0xBABE;
+        // let initial_owner = @0xCAFE;
+        // let final_owner = @0xFACE;
+
+        // first transaction to emulate module initialization
+        let scenario_val = test_scenario::begin(admin);
+        let scenario = &mut scenario_val;
+        {
+            candymachine::init_candy(
+                string::utf8(b"Mokshya Test"),
+                string::utf8(b"Mokshya Test"),
+                string::utf8(b"https://mokshya.io/images/"),
+                admin,
+                1000,
+                100,
+                100,
+                100,
+                1000,
+                10000,
+                1000,
+                b"sss",
+                test_scenario::ctx(scenario)
+            )
+        };
+        test_scenario::next_tx(scenario, admin);
+        {
+            let candy = test_scenario::take_from_sender<CandyMachine>(scenario);
+            candymachine::mint_nft(&mut candy,test_scenario::ctx(scenario));
+            test_scenario::return_to_sender(scenario, candy)
+        };
+        test_scenario::end(scenario_val);
     }
 }
